@@ -2,31 +2,8 @@ import unittest
 
 from app.main import db
 from app.main.model.blacklist import BlacklistToken
-import json
 from app.test.base import BaseTestCase
-
-
-def register_user(self):
-    return self.client.post(
-        '/user/',
-        data=json.dumps(dict(
-            email='joe@gmail.com',
-            username='username',
-            password='123456'
-        )),
-        content_type='application/json'
-    )
-
-
-def login_user(self):
-    return self.client.post(
-        '/auth/login',
-        data=json.dumps(dict(
-            email='joe@gmail.com',
-            password='123456'
-        )),
-        content_type='application/json'
-    )
+from app.test.utils.auth_helpers import register_user, login_user
 
 
 class TestAuthBlueprint(BaseTestCase):

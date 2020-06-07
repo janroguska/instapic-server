@@ -1,13 +1,18 @@
 import os
+import uuid
+import datetime
+from sqlalchemy_imageattach.stores import fs
 
 # uncomment the line below for postgres database url from environment variable
 # postgres_local_base = os.environ['DATABASE_URL']
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
+    STORE = os.path.join(basedir, 'images')
+    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+    MAX_FILE_SIZE = 2 * 1024 * 1024
     DEBUG = False
 
 
@@ -40,3 +45,9 @@ config_by_name = dict(
 )
 
 key = Config.SECRET_KEY
+
+store = Config.STORE
+
+file_types = Config.ALLOWED_EXTENSIONS
+
+max_file_size = Config.MAX_FILE_SIZE
