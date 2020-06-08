@@ -84,8 +84,8 @@ def save_image(image):
         os.makedirs(store)
     # Save the file
     path = os.path.join(store, unique_filename)
-    image.save(path)
-    return path
+    image.save(filename)
+    return filename
 
 
 def save_changes(data):
