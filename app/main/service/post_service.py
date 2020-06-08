@@ -27,7 +27,7 @@ def save_new_post(request):
                 public_id=str(uuid.uuid4()),
                 caption=data['caption'],
                 uploaded_at=datetime.datetime.utcnow(),
-                owner_id=user.public_id,
+                owner=user.username,
                 image=image_url,
             )
             save_changes(new_post)

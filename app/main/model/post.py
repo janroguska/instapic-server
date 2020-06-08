@@ -7,7 +7,7 @@ class Post(db.Model):
     __tablename__ = "post"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('user.public_id'), nullable=False)
+    owner = db.Column(db.Integer, db.ForeignKey('user.username'), nullable=False)
     uploaded_at = db.Column(db.DateTime, nullable=False)
     public_id = db.Column(db.String(100), unique=True)
     image = db.Column(db.String(100), unique=True)

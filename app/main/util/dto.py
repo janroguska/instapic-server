@@ -6,7 +6,7 @@ class PostDto:
     api = Namespace('post', description='post related operations')
     post_model = api.model('post', {
         'caption': fields.String(required=True, description='post caption'),
-        'owner_id': fields.String(required=True, description='public id of user who posted'),
+        'owner': fields.String(required=True, description='user who posted'),
         'image': fields.String(required=True, description='post image'),
         'uploaded_at': fields.DateTime(required=True, description='time of post'),
     })
@@ -18,9 +18,21 @@ class PostDto:
 class UserDto:
     api = Namespace('user', description='user related operations')
     user = api.model('user', {
-        'email': fields.String(required=True, description='user email address'),
-        'username': fields.String(required=True, description='user username'),
-        'password': fields.String(required=True, description='user password'),
+        'email': fields.String(
+            required=True,
+            description='user email address',
+            min_length=6
+        ),
+        'username': fields.String(
+            required=True,
+            description='user username',
+            min_length=6
+        ),
+        'password': fields.String(
+            required=True,
+            description='user password',
+            min_length=6
+        ),
         'public_id': fields.String(description='user Identifier'),
         'posts': fields.Nested(PostDto.post_model)
     })
