@@ -1,4 +1,4 @@
-# Django_REST_API_Example
+# InstaPic Server
 
 ## Production URL
 
