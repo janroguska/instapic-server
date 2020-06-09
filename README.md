@@ -1,39 +1,87 @@
-#### FLASK RESTFUL API BOILER-PLATE WITH JWT
+# Django_REST_API_Example
 
-### Terminal commands
+## Production URL
 
-    Initial installation: make install
+https://protected-temple-53328.herokuapp.com
 
-    To run test: make tests
+## Setup
+* Ensure Python is installed globally.
+* ```bash
+  $ pip install virtualenv
+  ```
+* ```bash
+  $ virtualenv --python=python3 env
+  ```
+* ```bash
+  $ source env/bin/activate
+  ```
+* ```bash
+  $ pip install -r requirements.txt
+  ```
+* ```bash
+  $ python manage.py db init
+  ```
+* ```bash
+  $ python manage.py db migrate --message '<Your commit message>'
+  ```
+* ```bash
+  $ python manage.py db upgrade
+  ```
+## Running the Server
+* ```bash
+  $ make run
+  ```
 
-    To run application: make run
+## API
 
-    To run all commands at once : make all
+### Auth
 
+*Endpoint:* `/auth/login`
+*Method:* `POST`
+*Arguments:*
 
-### Viewing the app ###
+* password: String (min 6)
+* email: String (min 6)
 
-    Open the following url on your browser to view swagger documentation
-    http://127.0.0.1:5000/
+### Registration
 
+*Endpoint:* `/user/`
+*Method:* `POST`
+*Arguments:*
 
-### Using Postman ####
+* username: String (min 6)
+* password: String (min 6)
+* email: String (min 6)
 
-    Authorization header is in the following format:
+### List Users
 
-    Key: Authorization
-    Value: "token_generated_during_login"
+*Endpoint:* `/user/`
+*Method:* `GET`
+*Authorization*: `token`
 
-    For testing authorization, url for getting all user requires an admin token while url for getting a single
-    user by public_id requires just a regular authentication.
+### List User
 
-### Full description and guide ###
-https://medium.freecodecamp.org/structuring-a-flask-restplus-web-service-for-production-builds-c2ec676de563
+*Endpoint:* `/user/<username>`
+*Method:* `GET`
+*Authorization*: `token`
 
+### List Posts
 
-### Contributing
-If you want to contribute to this flask restplus boilerplate, clone the repository and just start making pull requests.
+*Endpoint:* `/post/`
+*Method:* `GET`
+*Authorization*: `token`
+*Params:*
 
-```
-https://github.com/cosmic-byte/flask-restplus-boilerplate.git
-```
+* user: `<username>` (optional)
+* sort_by: `newest || oldest` (optional)
+* page: integer (optional)
+
+### Submit Post
+
+*Endpoint:* `/post/`
+*Method:* `POST`
+*Authorization*: `token`
+*Arguments:*
+
+* caption: String
+* image: file [.png, .jpg, .jpeg, .gif] max 2MB
