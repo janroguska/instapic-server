@@ -12,3 +12,6 @@ class Post(db.Model):
     public_id = db.Column(db.String(100), unique=True)
     image = db.Column(db.String(100), unique=True)
     caption = db.Column(db.String(2200))
+
+    def __repr__(self):
+        return "<Post '{}'>".format(self.public_id)
