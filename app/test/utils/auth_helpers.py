@@ -22,14 +22,3 @@ def login_user(self):
         )),
         content_type='application/json'
     )
-
-
-def login_registered_user(self):
-    return self.client.post(
-        '/auth/login',
-        data=json.dumps(dict(
-            email='bob@bob.com',
-            password='password'
-        )),
-        content_type='application/json'
-    )

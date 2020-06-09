@@ -52,25 +52,32 @@ def save_new_post(request):
 def get_all_posts(params):
     page = params.get('page')
     sort_by = params.get('sort_by')
+    user = params.get('user')
     # Get the page to query
     if page is not None and page.isdigit():
         page_to_search = int(page)
     else:
         page_to_search = 1
 
+    # Filter by user if it's in the query
+    data = { 'owner': user }
+    filter_data = {
+        key: value for (key, value) in data.items() if value
+    } 
+
     # Sort by user or date
     if sort_by == 'user':
-        return Post.query.order_by(desc(Post.owner_id)) \
-        .paginate(page=page_to_search, per_page=20, error_out=False).items
+        return Post.query.filter_by(**filter_data).order_by(desc(Post.owner)) \
+        .paginate(page=page_to_search, per_page=18, error_out=False).items
     elif sort_by == 'newest':
-        return Post.query.order_by(desc(Post.uploaded_at)) \
-        .paginate(page=page_to_search, per_page=20, error_out=False).items
+        return Post.query.filter_by(**filter_data).order_by(desc(Post.uploaded_at)) \
+        .paginate(page=page_to_search, per_page=18, error_out=False).items
     elif sort_by == 'oldest':
-        return Post.query.order_by(asc(Post.uploaded_at)) \
-        .paginate(page=page_to_search, per_page=20, error_out=False).items
+        return Post.query.filter_by(**filter_data).order_by(asc(Post.uploaded_at)) \
+        .paginate(page=page_to_search, per_page=18, error_out=False).items
     else:
-        return Post.query \
-        .paginate(page=page_to_search, per_page=20, error_out=False).items
+        return Post.query.filter_by(**filter_data) \
+        .paginate(page=page_to_search, per_page=18, error_out=False).items
 
 
 def save_image(image):
@@ -85,7 +92,7 @@ def save_image(image):
     # Save the file
     path = os.path.join(store, unique_filename)
     image.save(path)
-    return path
+    return unique_filename
 
 
 def save_changes(data):

@@ -1,7 +1,8 @@
-from flask import request
+from flask import request, send_from_directory
 from flask_restplus import Resource
 
 from app.main.util.decorator import token_required, allowed_file, file_size_limit
+from app.main.config import store
 from ..util.dto import PostDto
 from ..service.post_service import save_new_post, get_all_posts
 
@@ -29,3 +30,9 @@ class PostList(Resource):
     def post(self):
         """Creates a new Post """
         return save_new_post(request=request)
+
+@api.route('/<path:filename>')
+class Post(Resource):
+    @api.doc('get the image')
+    def get(self, filename):
+        return send_from_directory(store, filename)

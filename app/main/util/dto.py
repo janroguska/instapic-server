@@ -33,8 +33,7 @@ class UserDto:
             description='user password',
             min_length=6
         ),
-        'public_id': fields.String(description='user Identifier'),
-        'posts': fields.Nested(PostDto.post_model)
+        'public_id': fields.String(description='user Identifier')
     })
 
 
