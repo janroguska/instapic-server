@@ -37,7 +37,9 @@ https://protected-temple-53328.herokuapp.com
 ### Auth
 
 *Endpoint:* `/auth/login`
+
 *Method:* `POST`
+
 *Arguments:*
 
 * password: String (min 6)
@@ -46,7 +48,9 @@ https://protected-temple-53328.herokuapp.com
 ### Registration
 
 *Endpoint:* `/user/`
+
 *Method:* `POST`
+
 *Arguments:*
 
 * username: String (min 6)
@@ -56,20 +60,27 @@ https://protected-temple-53328.herokuapp.com
 ### List Users
 
 *Endpoint:* `/user/`
+
 *Method:* `GET`
+
 *Authorization*: `token`
 
 ### List User
 
 *Endpoint:* `/user/<username>`
+
 *Method:* `GET`
+
 *Authorization*: `token`
 
 ### List Posts
 
 *Endpoint:* `/post/`
+
 *Method:* `GET`
+
 *Authorization*: `token`
+
 *Params:*
 
 * user: `<username>` (optional)
@@ -79,8 +90,11 @@ https://protected-temple-53328.herokuapp.com
 ### Submit Post
 
 *Endpoint:* `/post/`
+
 *Method:* `POST`
+
 *Authorization*: `token`
+
 *Arguments:*
 
 * caption: String
