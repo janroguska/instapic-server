@@ -31,7 +31,7 @@ class PostList(Resource):
         """Creates a new Post """
         return save_new_post(request=request)
 
-@api.route('/<path:filename>')
+@api.route('/image/<path:filename>')
 class Post(Resource):
     @api.doc('get the image')
     def get(self, filename):
