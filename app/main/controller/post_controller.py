@@ -35,5 +35,4 @@ class PostList(Resource):
 class Post(Resource):
     @api.doc('get the image')
     def get(self, filename):
-        print('hello')
         return send_from_directory(store, filename)
