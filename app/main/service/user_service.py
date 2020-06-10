@@ -56,8 +56,8 @@ def save_changes(data):
         db.session.add(data)
         db.session.commit()
     except:
-        session.rollback()
+        db.session.rollback()
         raise
     finally:
-        session.close()
+        db.session.close()
 
