@@ -1,12 +1,18 @@
 import uuid
 import datetime
+from sqlalchemy import or_
 
 from app.main import db
 from app.main.model.user import User
 
 
 def save_new_user(data):
-    user = User.query.filter_by(email=data['email']).first()
+    user = User.query.filter(
+        or_(
+            User.email.like(data['email']),
+            User.username.like(data['username'])
+        )
+    ).first()
     if not user:
         new_user = User(
             public_id=str(uuid.uuid4()),
