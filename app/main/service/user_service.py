@@ -53,5 +53,9 @@ def generate_token(user):
 
 def save_changes(data):
     db.session.add(data)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except:
+        session.rollback()
+        raise
 
