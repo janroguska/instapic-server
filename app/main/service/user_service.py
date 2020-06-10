@@ -42,22 +42,22 @@ def generate_token(user):
             'message': 'Successfully registered.',
             'Authorization': auth_token.decode()
         }
+        db.session.close()
         return response_object, 201
     except Exception as e:
         response_object = {
             'status': 'fail',
             'message': 'Some error occurred. Please try again.'
         }
+        db.session.close()
         return response_object, 401
 
 
 def save_changes(data):
-    db.session.add(data)
     try:
+        db.session.add(data)
         db.session.commit()
     except:
         db.session.rollback()
         raise
-    finally:
-        db.session.close()
 
